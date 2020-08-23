@@ -10,7 +10,9 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.view.WindowManager
 import android.webkit.WebView
@@ -123,7 +125,12 @@ class MainActivity : AppCompatActivity() {
 
                 request.setDescription("Downloading ...")
                 request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-                request.setDestinationInExternalPublicDir("Crackwatch_Comments_Downloads", getFileName(url))
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, getFileName(url))
+                }else{
+                    request.setDestinationInExternalPublicDir("Crackwatch_Comments_Downloads", getFileName(url))
+                }
+
                 val downloadManager =
                     this@MainActivity.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
                 val downloadID = downloadManager.enqueue(request)
