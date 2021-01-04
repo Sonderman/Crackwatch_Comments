@@ -17,13 +17,13 @@ class Admob {
   }
 
   static BannerAd buildBannerAd() => BannerAd(
-        adUnitId : bannerTopID, // BannerAd.testAdUnitId
+        adUnitId: bannerTopID, // BannerAd.testAdUnitId
         size: AdSize.smartBanner,
         targetingInfo: targetingInfo,
         listener: (MobileAdEvent event) {
           if (event == MobileAdEvent.loaded) {
             print("Banner Yüklendi");
-          }else{
+          } else {
             print("Banner Yüklenemedi");
           }
         },

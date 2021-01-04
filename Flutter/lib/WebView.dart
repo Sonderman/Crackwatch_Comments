@@ -2,7 +2,6 @@ import 'package:crackwatch_comments/admob.dart';
 import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 class WebViewPage extends StatefulWidget {
   WebViewPage({Key key}) : super(key: key);
@@ -63,12 +62,13 @@ class _WebViewState extends State<WebViewPage> {
             javascriptMode: JavascriptMode.unrestricted,
             //gestureNavigationEnabled: false,
             navigationDelegate: (NavigationRequest request) {
-              print("Current Request:"+request.url);
-              if (!request.url.startsWith('https://crackwatch.com/best-comments') && !request.url.startsWith('https://b2.crackwatch.com/file')) {
+              print("Current Request:" + request.url);
+              if (!request.url
+                      .startsWith('https://crackwatch.com/best-comments') &&
+                  !request.url.startsWith('https://b2.crackwatch.com/file')) {
                 print('blocking navigation to $request}');
                 return NavigationDecision.prevent;
-              }
-              else
+              } else
                 return NavigationDecision.navigate;
             },
           ),
